@@ -1,0 +1,58 @@
+{
+  "name": "hass-qubino-flush-pilot-wire-card",
+  "version": "0.0.1",
+  "description": "Home assitant qubino flush pilot wire control card",
+  "main": "index.js",
+  "scripts": {
+    "start": "rollup -c rollup.config.dev.js --watch",
+    "build": "npm run lint && npm run rollup",
+    "rollup": "rollup -c",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src/*.ts --max-warnings=0",
+    "lint:fix": "eslint src/*.ts --max-warnings=0 --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylcastaing/hass-qubino-flush-pilot-wire-card.git"
+  },
+  "author": "Sylvain Castaing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sylcastaing/hass-qubino-flush-pilot-wire-card/issues"
+  },
+  "homepage": "https://github.com/sylcastaing/hass-qubino-flush-pilot-wire-card#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-decorators": "^7.7.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.19.1",
+    "rollup": "^1.26.5",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.25.2",
+    "typescript": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "prettier --write",
+      "yarn lint:fix",
+      "git add"
+    ]
+  }
+}
