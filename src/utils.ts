@@ -17,14 +17,14 @@ const heaterModeMatcher: { [key in HeaterMode]: brightnessMatcher } = {
   [HeaterMode.COMFORT]: b => b >= 128,
 };
 
-export const getHeaterBrightness = (entity: HassEntity): number => {
+export function getHeaterBrightness(entity: HassEntity): number {
   return pipe(
     O.fromNullable(entity.attributes.brightness),
     O.getOrElse(() => 0),
   );
-};
+}
 
-export const getHeaterMode = (entity: HassEntity): HeaterMode => {
+export function getHeaterMode(entity: HassEntity): HeaterMode {
   const brightness = getHeaterBrightness(entity);
 
   return pipe(
@@ -32,4 +32,8 @@ export const getHeaterMode = (entity: HassEntity): HeaterMode => {
     A.findFirst(mode => heaterModeMatcher[mode](brightness)),
     O.getOrElse<HeaterMode>(() => HeaterMode.OFF),
   );
-};
+}
+
+export function isHeaterOn(entity: HassEntity): boolean {
+  return getHeaterMode(entity) !== HeaterMode.OFF;
+}
