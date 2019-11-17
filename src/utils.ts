@@ -1,10 +1,18 @@
 import { HassEntity } from 'home-assistant-js-websocket';
 
-import { HeaterMode, heaterModes } from './types';
+import { HeaterMode, heaterModes, QubinoFlushWirePilotConfig } from './types';
 
 import { pipe } from 'fp-ts/lib/pipeable';
 import * as O from 'fp-ts/lib/Option';
 import * as A from 'fp-ts/lib/Array';
+
+export function validateConfig(config: QubinoFlushWirePilotConfig): QubinoFlushWirePilotConfig {
+  if (!config || !config.entity) {
+    throw new Error('Invalid configuration');
+  }
+
+  return config;
+}
 
 type brightnessMatcher = (brightness: number) => boolean;
 

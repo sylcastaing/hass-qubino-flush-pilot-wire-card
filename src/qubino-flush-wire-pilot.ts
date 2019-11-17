@@ -2,20 +2,12 @@ import { css, CSSResult, customElement, html, LitElement, property, PropertyValu
 
 import { hasConfigOrEntityChanged, HomeAssistant } from 'custom-card-helpers';
 
-import {
-  HeaterMode,
-  heaterModeLabels,
-  heaterModes,
-  QubinoFlushWirePilotConfig,
-  QubinoFlushWirePilotConfigType,
-} from './types';
+import { HeaterMode, heaterModeLabels, heaterModes, QubinoFlushWirePilotConfig } from './types';
 
 import { pipe } from 'fp-ts/lib/pipeable';
-import * as EI from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';
-import { failure } from 'io-ts/lib/PathReporter';
 import { HassEntity } from 'home-assistant-js-websocket';
-import { getHeaterMode, isHeaterOn } from './utils';
+import { getHeaterMode, isHeaterOn, validateConfig } from './utils';
 
 @customElement('qubino-flush-pilot-wire')
 export class QubinoFlushPilotWireCard extends LitElement {
@@ -26,13 +18,7 @@ export class QubinoFlushPilotWireCard extends LitElement {
   private _config!: QubinoFlushWirePilotConfig;
 
   public setConfig(config: QubinoFlushWirePilotConfig): void {
-    const result = QubinoFlushWirePilotConfigType.decode(config);
-
-    if (EI.isLeft(result)) {
-      throw new Error(`Invalid configuration : ${failure(result.left)}`);
-    } else {
-      this._config = result.right;
-    }
+    this._config = validateConfig(config);
   }
 
   protected shouldUpdate(changedProps: PropertyValues): boolean {
