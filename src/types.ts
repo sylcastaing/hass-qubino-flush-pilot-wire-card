@@ -1,5 +1,3 @@
-import * as t from 'io-ts';
-
 export enum HeaterMode {
   OFF = 0,
   ANTI_FREEZE = 38,
@@ -31,8 +29,3 @@ export interface QubinoFlushWirePilotConfig {
   type: string;
   entity: string;
 }
-
-export const QubinoFlushWirePilotConfigType = t.type({
-  type: t.string,
-  entity: t.string,
-});

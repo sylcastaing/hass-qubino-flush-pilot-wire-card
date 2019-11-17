@@ -1,5 +1,4 @@
 import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import serve from 'rollup-plugin-serve';
 
@@ -10,11 +9,7 @@ export default {
     format: 'es',
   },
   plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-    }),
-    commonjs(),
+    resolve(),
     typescript(),
     serve({
       contentBase: './dist',
