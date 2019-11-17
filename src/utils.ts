@@ -2,10 +2,6 @@ import { HassEntity } from 'home-assistant-js-websocket';
 
 import { HeaterMode, heaterModes, QubinoFlushWirePilotConfig } from './types';
 
-import { pipe } from 'fp-ts/lib/pipeable';
-import * as O from 'fp-ts/lib/Option';
-import * as A from 'fp-ts/lib/Array';
-
 export function validateConfig(config: QubinoFlushWirePilotConfig): QubinoFlushWirePilotConfig {
   if (!config || !config.entity) {
     throw new Error('Invalid configuration');
@@ -26,20 +22,13 @@ const heaterModeMatcher: { [key in HeaterMode]: brightnessMatcher } = {
 };
 
 export function getHeaterBrightness(entity: HassEntity): number {
-  return pipe(
-    O.fromNullable(entity.attributes.brightness),
-    O.getOrElse(() => 0),
-  );
+  return entity.attributes.brightness || 0;
 }
 
 export function getHeaterMode(entity: HassEntity): HeaterMode {
   const brightness = getHeaterBrightness(entity);
 
-  return pipe(
-    heaterModes,
-    A.findFirst(mode => heaterModeMatcher[mode](brightness)),
-    O.getOrElse<HeaterMode>(() => HeaterMode.OFF),
-  );
+  return heaterModes.find(mode => heaterModeMatcher[mode](brightness)) || HeaterMode.OFF;
 }
 
 export function isHeaterOn(entity: HassEntity): boolean {

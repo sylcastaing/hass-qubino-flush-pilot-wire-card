@@ -4,8 +4,6 @@ import { hasConfigOrEntityChanged, HomeAssistant } from 'custom-card-helpers';
 
 import { HeaterMode, heaterModeLabels, heaterModes, QubinoFlushWirePilotConfig } from './types';
 
-import { pipe } from 'fp-ts/lib/pipeable';
-import * as O from 'fp-ts/lib/Option';
 import { HassEntity } from 'home-assistant-js-websocket';
 import { getHeaterMode, isHeaterOn, validateConfig } from './utils';
 
@@ -25,8 +23,8 @@ export class QubinoFlushPilotWireCard extends LitElement {
     return hasConfigOrEntityChanged(this, changedProps, false);
   }
 
-  private getEntity(): O.Option<HassEntity> {
-    return O.fromNullable(this.hass.states[this._config.entity]);
+  private getEntity(): HassEntity | null | undefined {
+    return this.hass.states[this._config.entity];
   }
 
   private handleChangeMode = (mode: HeaterMode) => (): void => {
@@ -69,17 +67,17 @@ export class QubinoFlushPilotWireCard extends LitElement {
   };
 
   protected render(): TemplateResult {
-    return pipe(
-      this.getEntity(),
-      O.fold(
-        () => html`
-          <ha-card>
-            <div class="qubino-container">Entity not found</div>
-          </ha-card>
-        `,
-        this.renderEntity,
-      ),
-    );
+    const heaterEntity = this.getEntity();
+
+    if (heaterEntity) {
+      return this.renderEntity(heaterEntity);
+    } else {
+      return html`
+        <ha-card>
+          <div class="qubino-container">Entity not found</div>
+        </ha-card>
+      `;
+    }
   }
 
   static get styles(): CSSResult {
