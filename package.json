@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "rollup -c rollup.config.dev.js --watch",
-    "build": "npm run lint && npm run rollup",
+    "build": "npm run rollup",
     "rollup": "rollup -c",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src/*.ts --max-warnings=0",
-    "lint:fix": "eslint src/*.ts --max-warnings=0 --fix"
+    "lint:fix": "eslint src/*.ts --max-warnings=0 --fix",
+    "bundlewatch": "bundlewatch"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "@babel/plugin-proposal-decorators": "^7.7.0",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
+    "bundlewatch": "^0.2.5",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.5.0",
@@ -62,6 +64,14 @@
       "prettier --write",
       "yarn lint:fix",
       "git add"
+    ]
+  },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./dist/qubino-flush-wire-pilot.js",
+        "maxSize": "50 kB"
+      }
     ]
   }
 }
