@@ -1,3 +1,6 @@
+![GitHub](https://img.shields.io/github/license/sylcastaing/hass-qubino-flush-pilot-wire-card)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/sylcastaing/hass-qubino-flush-pilot-wire-card)
+
 # Home assistant Qubino flush wire pilot control card
 
 A beautiful lovelace card for your Qubino heater control !
