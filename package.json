@@ -1,6 +1,6 @@
 {
   "name": "hass-qubino-flush-pilot-wire-card",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Home assitant qubino flush pilot wire control card",
   "main": "index.js",
   "scripts": {
