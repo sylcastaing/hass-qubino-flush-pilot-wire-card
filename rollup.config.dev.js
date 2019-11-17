@@ -9,10 +9,7 @@ export default {
     format: 'es',
   },
   plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-    }),
+    resolve(),
     typescript(),
     serve({
       contentBase: './dist',

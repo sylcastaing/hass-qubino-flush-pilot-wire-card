@@ -10,10 +10,7 @@ export default {
     format: 'es',
   },
   plugins: [
-    resolve({
-      jsnext: true,
-      main: true,
-    }),
+    resolve(),
     typescript(),
     babel({
       exclude: 'node_modules/**',
