@@ -9,7 +9,7 @@ A beautiful lovelace card for your Qubino heater control !
 
 You can see [Lovelace custom cards documentation](https://developers.home-assistant.io/docs/en/lovelace_custom_card.html) for more detail.
 
-- Download latest version of file qubino-flush-wire-pilot.js
+- Download latest [zip version](https://github.com/sylcastaing/hass-qubino-flush-pilot-wire-card/releases) and extract qubino-flush-wire-pilot.js file
 - Add it to the www folder of your Home Assistant config
 
 - Add custom module in your lovelace configuration
