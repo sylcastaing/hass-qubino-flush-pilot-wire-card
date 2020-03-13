@@ -36,7 +36,7 @@
     "@typescript-eslint/parser": "2.16.0",
     "bundlewatch": "0.2.5",
     "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-airbnb-base": "14.1.0",
     "eslint-config-prettier": "6.9.0",
     "eslint-plugin-import": "2.20.0",
     "eslint-plugin-prettier": "3.1.2",
