@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/sylcastaing/hass-qubino-flush-pilot-wire-card#readme",
   "dependencies": {
-    "custom-card-helpers": "1.4.0",
+    "custom-card-helpers": "1.6.4",
     "home-assistant-js-websocket": "4.4.0",
     "lit-element": "2.2.1",
     "lit-html": "1.1.2"
