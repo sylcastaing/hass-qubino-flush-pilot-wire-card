@@ -1,4 +1,14 @@
-import { css, CSSResult, customElement, html, LitElement, property, PropertyValues, TemplateResult } from 'lit-element';
+import {
+  css,
+  CSSResult,
+  customElement,
+  html,
+  internalProperty,
+  LitElement,
+  property,
+  PropertyValues,
+  TemplateResult,
+} from 'lit-element';
 
 import { hasConfigOrEntityChanged, HomeAssistant } from 'custom-card-helpers';
 
@@ -9,32 +19,36 @@ import { getHeaterMode, isHeaterOn, validateConfig } from './utils';
 
 @customElement('qubino-flush-pilot-wire')
 export class QubinoFlushPilotWireCard extends LitElement {
-  @property()
+  @property({ attribute: false })
   private hass!: HomeAssistant;
 
-  @property()
-  private _config!: QubinoFlushWirePilotConfig;
+  @internalProperty()
+  private config!: QubinoFlushWirePilotConfig;
 
   public setConfig(config: QubinoFlushWirePilotConfig): void {
-    this._config = validateConfig(config);
+    this.config = validateConfig(config);
   }
 
   protected shouldUpdate(changedProps: PropertyValues): boolean {
+    if (!this.config) {
+      return false;
+    }
+
     return hasConfigOrEntityChanged(this, changedProps, false);
   }
 
   private getEntity(): HassEntity | null | undefined {
-    return this.hass.states[this._config.entity];
+    return this.hass.states[this.config.entity];
   }
 
   private handleChangeMode = (mode: HeaterMode) => (): void => {
     if (mode === HeaterMode.OFF) {
       this.hass.callService('light', 'turn_off', {
-        entity_id: this._config.entity,
+        entity_id: this.config.entity,
       });
     } else {
       this.hass.callService('light', 'turn_on', {
-        entity_id: this._config.entity,
+        entity_id: this.config.entity,
         brightness: mode,
       });
     }
