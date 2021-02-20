@@ -22,7 +22,7 @@ You can see [Lovelace custom cards documentation](https://developers.home-assist
 
 resources:
   # add ?v parameter to invalid cache in case of update
-  - url: /local/qubino-flush-wire-pilot.js?v=1.0.0
+  - url: /local/qubino-flush-wire-pilot.js?v=1.1.0
     type: module
 ```
 
