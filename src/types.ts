@@ -16,7 +16,7 @@ export const heaterModes: Array<HeaterMode> = [
   HeaterMode.COMFORT,
 ];
 
-export const heaterModeLabels: { [key in HeaterMode]: string } = {
+export const heaterModeLabels: Record<HeaterMode, string> = {
   [HeaterMode.OFF]: 'Off',
   [HeaterMode.ANTI_FREEZE]: 'Hors Gel',
   [HeaterMode.ECO]: 'Eco',
