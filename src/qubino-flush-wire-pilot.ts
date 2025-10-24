@@ -1,18 +1,10 @@
-import {
-  css,
-  CSSResult,
-  customElement,
-  html,
-  internalProperty,
-  LitElement,
-  property,
-  PropertyValues,
-  TemplateResult,
-} from 'lit-element';
+import { css, CSSResult, html, LitElement, PropertyValues, TemplateResult } from 'lit';
 
-import { hasConfigOrEntityChanged, HomeAssistant } from 'custom-card-helpers';
+import { customElement, property, state } from 'lit/decorators.js';
 
-import { HeaterMode, heaterModeLabels, heaterModes, QubinoFlushWirePilotConfig } from './types';
+import { hasConfigOrEntityChanged, type HomeAssistant } from 'custom-card-helpers';
+
+import { HeaterMode, heaterModeLabels, heaterModes, type QubinoFlushWirePilotConfig } from './types';
 
 import { HassEntity } from 'home-assistant-js-websocket';
 import { getHeaterMode, isHeaterOn, validateConfig } from './utils';
@@ -22,7 +14,7 @@ export class QubinoFlushPilotWireCard extends LitElement {
   @property({ attribute: false })
   private hass!: HomeAssistant;
 
-  @internalProperty()
+  @state()
   private config!: QubinoFlushWirePilotConfig;
 
   public setConfig(config: QubinoFlushWirePilotConfig): void {
