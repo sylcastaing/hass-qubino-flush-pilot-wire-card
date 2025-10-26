@@ -49,21 +49,20 @@ export class QubinoFlushPilotWireCard extends LitElement {
   private renderEntity = (entity: HassEntity): TemplateResult => {
     const currentMode = getHeaterMode(entity);
 
+    const isOn = isHeaterOn(entity);
+
     return html`
       <ha-card>
         <div class="qubino-container">
           <p class="header">${entity.attributes.friendly_name}</p>
-          <ha-icon icon=${isHeaterOn(entity) ? 'mdi:radiator' : 'mdi:radiator-off'}></ha-icon>
-          <p class="mode">${heaterModeLabels[currentMode]}</p>
+          <ha-icon icon=${isOn ? 'mdi:radiator' : 'mdi:radiator-off'} style=${`opacity: ${isOn ? '0.9' : '0.6'}`}>
+          </ha-icon>
           <div class="buttons-container">
             ${heaterModes.map(
               mode => html`
-                <mwc-button
-                  raised
-                  label=${heaterModeLabels[mode]}
-                  ?disabled=${mode === currentMode}
-                  @click=${this.handleChangeMode(mode)}
-                ></mwc-button>
+                <ha-button ?disabled=${mode === currentMode} @click=${this.handleChangeMode(mode)}
+                  >${heaterModeLabels[mode]}</ha-button
+                >
               `,
             )}
           </div>
@@ -89,27 +88,32 @@ export class QubinoFlushPilotWireCard extends LitElement {
   static get styles(): CSSResult {
     return css`
       .qubino-container {
+        display: flex;
+        flex-direction: column;
         text-align: center;
         padding: 15px;
+        gap: 20px;
+      }
+
+      .qubino-container p {
+        margin: 0;
+        padding: 0;
       }
 
       .qubino-container p.header {
-        font-size: 20px;
-        padding-bottom: 15px;
-      }
-
-      ha-icon {
-        width: 60px;
-        height: 60px;
-      }
-
-      .qubino-container p.mode {
         font-size: 18px;
-        padding: 15px 0;
       }
 
-      .buttons-container mwc-button {
-        padding: 10px 5px;
+      .qubino-container ha-icon {
+        --mdc-icon-size: 36px;
+      }
+
+      .qubino-container .buttons-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 20px 5px;
       }
     `;
   }
