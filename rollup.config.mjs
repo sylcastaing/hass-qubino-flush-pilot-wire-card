@@ -1,4 +1,3 @@
-import terser from '@rollup/plugin-terser';
 import swc from '@rollup/plugin-swc';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import { defineConfig } from 'eslint/config';
@@ -13,7 +12,10 @@ export default defineConfig({
     nodeResolve({
       extensions: ['.js', '.mjs', '.ts', '.d.ts'],
     }),
-    swc(),
-    terser(),
+    swc({
+      swc: {
+        minify: true,
+      },
+    }),
   ],
 });
