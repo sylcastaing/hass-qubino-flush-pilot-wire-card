@@ -29,14 +29,14 @@
     "lit": "3.3.1"
   },
   "devDependencies": {
-    "@eslint/js": "9.38.0",
+    "@eslint/js": "9.39.1",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-swc": "0.4.0",
     "@swc/core": "1.14.0",
     "@types/node": "24.10.0",
     "@typescript-eslint/eslint-plugin": "8.46.2",
     "@typescript-eslint/parser": "8.46.2",
-    "eslint": "9.38.0",
+    "eslint": "9.39.1",
     "husky": "9.1.7",
     "lint-staged": "16.2.6",
     "prettier": "3.6.2",
