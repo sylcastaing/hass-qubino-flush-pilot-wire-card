@@ -31,7 +31,7 @@
   "devDependencies": {
     "@eslint/js": "9.38.0",
     "@rollup/plugin-node-resolve": "16.0.3",
-    "@rollup/plugin-swc": "0.4.0",
+    "@rollup/plugin-swc": "0.4.1",
     "@swc/core": "1.14.0",
     "@types/node": "24.10.0",
     "@typescript-eslint/eslint-plugin": "8.46.2",
